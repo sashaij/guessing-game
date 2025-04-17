@@ -8,7 +8,6 @@ const rl = readline.createInterface({
 });
 
 function checkGuess (number) {
-
     if (Number(number) > secretNumber) {
         console.log('Too high!');
         return false;
@@ -28,4 +27,10 @@ function askGuess () {
     });
 }
 
-askGuess();
+function randomInRange (min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+console.log(randomInRange(5, 17));
+
+
