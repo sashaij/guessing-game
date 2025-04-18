@@ -1,4 +1,4 @@
-let secretNumber = 12;
+let secretNumber = 1;
 
 const readline = require('readline');
 
@@ -20,10 +20,14 @@ function checkGuess (number) {
     }
 }
 
-function askGuess () {
+function askGuess (bool) {
     rl.question('Enter a guess: ', answer => {
-        checkGuess(answer);
-        rl.close();
+        bool = checkGuess(answer);
+        if (bool === false) {
+            askGuess(bool);
+        } else if (bool === true) {
+            rl.close();
+        }
     });
 }
 
@@ -33,4 +37,4 @@ function randomInRange (min, max) {
 
 console.log(randomInRange(5, 17));
 
-
+askGuess();
