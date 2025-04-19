@@ -1,4 +1,4 @@
-let secretNumber = 1;
+let secretNumber = randomInRange(0, 100);
 
 const readline = require('readline');
 
@@ -35,6 +35,27 @@ function randomInRange (min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-console.log(randomInRange(5, 17));
+function askRange () {
+    let min = 0;
+    let max = 0;
 
-askGuess();
+    rl.question("Enter a min number: ", secondQuestion)
+
+    function secondQuestion (firstAnswer) {
+        min = firstAnswer;
+        console.log(firstAnswer);
+
+        rl.question('Enter max number: ', secondAnswer => {
+            max = secondAnswer;
+            console.log(secondAnswer);
+            secretNumber = randomInRange(Number(min), Number(max));
+            console.log(`I'm thinking of a number between ${min} and ${max}...`);
+            askGuess();
+        })
+    }
+
+}
+
+askRange();
+
+
