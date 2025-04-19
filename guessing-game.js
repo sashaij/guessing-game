@@ -21,11 +21,15 @@ function checkGuess (number) {
     }
 }
 
-function askGuess (bool) {
+function askGuess (limit, bool, count=1) {
     rl.question('Enter a guess: ', answer => {
         bool = checkGuess(answer);
-        if (bool === false) {
-            askGuess(bool);
+        if (count === limit) {
+            console.log("You've used all the attempts.");
+            console.log('You lose :(');
+            rl.close();
+        } else if (bool === false && count < limit) {
+            askGuess(limit, bool, count+1);
         } else if (bool === true) {
             rl.close();
         }
@@ -36,7 +40,7 @@ function randomInRange (min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function askRange () {
+function askRange (aLimit) {
     let min = 0;
     let max = 0;
 
@@ -51,12 +55,21 @@ function askRange () {
             console.log(secondAnswer);
             secretNumber = randomInRange(Number(min), Number(max));
             console.log(`I'm thinking of a number between ${min} and ${max}...`);
-            askGuess();
+            askGuess(aLimit);
         })
     }
 
 }
 
-askRange();
+function askLimit () {
+    let limit = 0;
+    rl.question('Enter the number of attempts: ', answer => {
+        limit = Number(answer);
+        console.log(answer);
+        askRange(limit);
+    })
+}
+
+askLimit();
 
 
