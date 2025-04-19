@@ -16,6 +16,7 @@ function checkGuess (number) {
         return false;
     } else if (Number(number) === secretNumber) {
         console.log('Correct!');
+        console.log('You win!');
         return true;
     }
 }
