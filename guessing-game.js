@@ -48,11 +48,9 @@ function askRange (aLimit) {
 
     function secondQuestion (firstAnswer) {
         min = firstAnswer;
-        console.log(firstAnswer);
 
         rl.question('Enter max number: ', secondAnswer => {
             max = secondAnswer;
-            console.log(secondAnswer);
             secretNumber = randomInRange(Number(min), Number(max));
             console.log(`I'm thinking of a number between ${min} and ${max}...`);
             askGuess(aLimit);
@@ -65,7 +63,6 @@ function askLimit () {
     let limit = 0;
     rl.question('Enter the number of attempts: ', answer => {
         limit = Number(answer);
-        console.log(answer);
         askRange(limit);
     })
 }
